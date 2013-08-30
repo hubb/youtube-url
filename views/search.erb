@@ -12,7 +12,13 @@
 </form>
 
 <% if @results && @results.any? %>
+	<table>
+	<th></th>
 	<% @results.each do |result| %>
-		<%= result['title'] %>&#09;<%= "http://youtube.com/watch?v=#{result['video_id']}" %><br />
+		<tr>
+			<td><%= result['title'] %></td>
+			<td><%= "http://youtube.com/watch?v=#{result['video_id']}" %></td>
+		</tr>
 	<% end %>
+	</table>
 <% end %>
