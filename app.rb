@@ -2,7 +2,6 @@ module YoutubeDL
   class Application < Sinatra::Base
 
     helpers do
-    # If @title is assigned, add it to the page's title.
     def title
       if @title
         "#{@title} -- Youtube URL Downloader"
@@ -19,10 +18,10 @@ module YoutubeDL
 
     post '/search' do
       search = params["search"]
-      query = search.fetch("query") { raise "LOL" }
-      lang = search.fetch("lang") { "en" }
+      query  = search.fetch("query") { raise "LOL" }
+      lang   = search.fetch("lang") { "en" }
 
-      @results = YoutubeSearch.search(query, 'lr' => lang, 'max-result' => 50)
+      @results = YoutubeSearch.search(query, 'lr' => lang, 'max-results' => 50)
       erb :search
     end
 
