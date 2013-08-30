@@ -1,0 +1,18 @@
+<h1>Search</h1>
+<form action="/search" method="post">
+  <label for="query">Query:</label><br />
+  <input id="query" name="search[query]" type="text" value="" />
+  <br />
+
+  <label for="lang">Lang:</label><br />
+  <input id="lang" name="search[lang]" type="text" value="fr" />
+  <br />
+
+  <input type="submit" value="Search" />
+</form>
+
+<% if @results && @results.any? %>
+	<% @results.each do |result| %>
+		<%= result['title'] %>&#09;<%= "http://youtube.com/watch?v=#{result['video_id']}" %><br />
+	<% end %>
+<% end %>
