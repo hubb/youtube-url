@@ -1,0 +1,27 @@
+- if @videos.any?
+  %table.table.table-hover
+    %th Preview
+    %th Title
+    %th Categories
+    %th Duration
+    %th Link
+    %th Views
+    %th Rating
+    %th Likes / Dislikes
+
+    - for video in @videos
+      %tr
+        %td
+          %img{:src => video.thumbnails.first.url}
+        %td= video.title
+        %td= video.categories.collect(&:label).join(', ')
+        %td= video.duration
+        %td= "http://youtube.com/watch?v=#{video.video_id}"
+        %td= video.view_count
+        %td= video.rating ? "#{video.rating.average} / #{video.rating.rater_count}" : "no data"
+        %td= video.rating ? "#{video.rating.likes} / #{video.rating.dislikes}" : "no data"
+
+- else
+  %h1 Sorry!
+  %p== "No videos match '#{@search.query}'"
+

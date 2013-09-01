@@ -1,12 +1,9 @@
 require 'rubygems'
 require 'bundler'
 
-Bundler.require
+Bundler.require :default, ENV['RACK_ENV'] || :development
 
 $:.unshift File.dirname(__FILE__)
 
 require 'app'
-
-map '/' do
-  run YoutubeDL::Application
-end
+run YoutubeDL::Application

@@ -1,36 +1,36 @@
+$:.unshift File.join(__FILE__)
+
+require 'sinatra'
+require 'youtube_it'
+require 'haml'
+
+require './models/search'
+require './helpers/base'
+
 module YoutubeDL
   class Application < Sinatra::Base
 
-    helpers do
-    def title
-      if @title
-        "#{@title} -- Youtube URL Downloader"
-      else
-        "Youtube URL Downloader"
-      end
-    end
-
-  end
+    helpers Helpers::Pages, Helpers::Authentication
 
     get '/' do
-      @search = ""
-      erb :search
+      haml :welcome
+    end
+
+    get '/search' do
+      @videos = []
+      haml :videos
     end
 
     post '/search' do
+      begin
+        @search = Search.new(params["search"])
+      rescue ArgumentError => error
+        halt 400, error.to_s
+      end
 
-      @search = params.fetch("search") { raise "Give me something to search!" }
-      @lang   = params.fetch("lang")   { "en" }
+      @videos = @search.results
 
-      client = YouTubeIt::Client.new
-
-      @results = client.videos_by(
-        :query    => @search,
-        :hl       => @lang,
-        :per_page => 50
-      ).videos
-
-      erb :search
+      haml :videos
     end
 
   end
