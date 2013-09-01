@@ -4,6 +4,13 @@ require 'haml'
 require './models/search'
 require './helpers/base'
 
+require 'openid'
+require 'omniauth-openid'
+require 'omniauth-google-apps'
+require 'gapps_openid'
+
+require 'openid/store/filesystem'
+
 module YoutubeDL
   class Application < Sinatra::Base
 

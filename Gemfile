@@ -7,6 +7,11 @@ gem 'youtube_it', require: false
 gem 'haml'
 gem 'thin'
 
+# Authentication with Google Apps
+gem 'omniauth-google-apps'
+gem 'omniauth-openid'
+gem 'ruby-openid-apps-discovery'
+
 group :development do
 	gem 'foreman'
 	gem 'pry'
