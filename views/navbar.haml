@@ -8,7 +8,6 @@
     %a.navbar-brand{:href => "/"}= title
 
   %div.collapse.navbar-collapse.navbar-ex1-collapse
-    = logged_in?
     - if logged_in?
       = haml :search
 
