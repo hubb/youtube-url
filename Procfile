@@ -1,1 +1,1 @@
-web: rackup -s thin
+web: rackup -s thin -p $PORT
