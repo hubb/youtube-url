@@ -1,7 +1,4 @@
-$:.unshift File.join(__FILE__)
-
 require 'sinatra'
-require 'youtube_it'
 require 'haml'
 
 require './models/search'
@@ -10,7 +7,9 @@ require './helpers/base'
 module YoutubeDL
   class Application < Sinatra::Base
 
-    helpers Helpers::Pages, Helpers::Authentication
+    helpers Helpers::Pages,
+            Helpers::Authentication
+
     # Enable Sessions
     use Rack::Session::Cookie, :secret => ENV['APP_SESSION_SECRET'] || "test"
 

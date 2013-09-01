@@ -10,7 +10,7 @@ describe YoutubeDL::Application do
 
 		it 'has a title' do
 			get '/'
-			last_response.body.should include("Youtube URL Downloader")
+			last_response.body.should include(app.helpers.title)
 		end
 
 		context 'logged out' do

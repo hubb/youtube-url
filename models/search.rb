@@ -1,3 +1,5 @@
+require 'youtube_it'
+
 module YoutubeDL
 	class Search
 
