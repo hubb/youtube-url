@@ -12,12 +12,17 @@
       = haml :search
 
     %ul.nav.navbar-nav.navbar-right
-      %li
-        %a{:href => "#"} Link
-      %li.dropdown
-        %a.dropdown-toggle{:href => "#", :'data-toggle' => "dropdown"}
-          Dropdown
-          %b.caret
-        %ul.dropdown-menu
-          %li
-            %a{:href => "/"} Action
+      - if logged_in?
+        %li.dropdown
+          %a.dropdown-toggle{:href => "#", :'data-toggle' => "dropdown"}
+            %span= current_user.name
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              %a{:href => "/logout"} Logout
+
+      - else
+        %li
+          %a.login{:href => "/auth/admin"}
+            Login
+            %span.glyphicon.glyphicon-user

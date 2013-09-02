@@ -1,3 +1,7 @@
 .navbar-form .form-group input.input-wide {
 	width: 400px;
 }
+
+a.login > span {
+	margin-left: 10px;
+}

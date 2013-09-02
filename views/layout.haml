@@ -15,10 +15,10 @@
     %link{:href => "css/styles.css", :type => "text/css", :rel => "stylesheet"}
 
     / Le fav and touch icons
-    %link{:rel => "apple-touch-icon", :href => "/bootstrap/images/apple-touch-icon.png"}
-    %link{:rel => "shortcut icon", :href => "/bootstrap/images/favicon.ico"}
-    %link{:rel => "apple-touch-icon", :sizes => "72x72", :href => "/bootstrap/images/apple-touch-icon-72x72.png"}
-    %link{:rel => "apple-touch-icon", :sizes => "114x114", :href => "/bootstrap/images/apple-touch-icon-114x114.png"}
+    / %link{:rel => "apple-touch-icon", :href => "/bootstrap/images/apple-touch-icon.png"}
+    / %link{:rel => "shortcut icon", :href => "/bootstrap/images/favicon.ico"}
+    / %link{:rel => "apple-touch-icon", :sizes => "72x72", :href => "/bootstrap/images/apple-touch-icon-72x72.png"}
+    / %link{:rel => "apple-touch-icon", :sizes => "114x114", :href => "/bootstrap/images/apple-touch-icon-114x114.png"}
 
   %body
 
@@ -29,10 +29,12 @@
     - else
       %div.jumbotron
         %div.container
-          %h1 Hello, world!
-          %p Please login!
+          %h2 Youtube URL extract for ad campaign
+          %p You need to login to use this app
           %p
-            %a.btn.btn-primary.btn-lg Login
+            %a.login.btn.btn-primary.btn-lg{:href => "/auth/admin"}
+              Login with Google
+              %span.glyphicon.glyphicon-user
 
     / Le js
     %script{:type => "text/javascript", :src =>"js/jquery-2.0.3.js"}

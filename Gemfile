@@ -12,10 +12,13 @@ gem 'omniauth-google-apps'
 gem 'omniauth-openid'
 gem 'ruby-openid-apps-discovery'
 
+gem 'pry'
+gem 'pry-nav'
+gem 'pry-remote'
+
+
 group :development do
 	gem 'foreman'
-	gem 'pry'
-	gem 'pry-nav'
 end
 
 group :test do

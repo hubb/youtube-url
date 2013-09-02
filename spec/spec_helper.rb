@@ -2,7 +2,7 @@ ENV['RACK_ENV'] = 'test'
 
 require 'rspec'
 require 'rack/test'
-require './app'
+require './boot'
 
 RSpec.configure do |conf|
   conf.include Rack::Test::Methods
@@ -11,4 +11,7 @@ RSpec.configure do |conf|
 	  @app ||= YoutubeDL::Application.new
 	end
 
+	def session
+	  last_request.env['rack.session']
+	end
 end
