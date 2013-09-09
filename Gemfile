@@ -12,16 +12,18 @@ gem 'omniauth-google-apps'
 gem 'omniauth-openid'
 gem 'ruby-openid-apps-discovery'
 
+# Flash
+gem 'rack-flash'
+
 gem 'pry'
 gem 'pry-nav'
 gem 'pry-remote'
 
-
 group :development do
-	gem 'foreman'
+  gem 'foreman'
 end
 
 group :test do
-	gem 'rspec'
+  gem 'rspec'
   gem 'rack-test'
 end

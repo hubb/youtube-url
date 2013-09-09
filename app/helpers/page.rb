@@ -1,5 +1,5 @@
 module YoutubeDL
-	module Helpers::Pages
+	module Helpers::Page
 
 		def title
       "Youtube URL Downloader"

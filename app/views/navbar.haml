@@ -1,21 +1,23 @@
-%nav.navbar.navbar-default{:role => "navigation"}
+%nav.navbar.navbar-default{role: 'navigation'}
   %div.navbar-header
-    %button.navbar-toggle{:type => "button", :'data-toggle' => "collapse", :'data-target' => ".navbar-ex1-collapse"}
+    %button.navbar-toggle{type: 'button', 'data-toggle': "collapse", 'data-target': '.navbar-ex1-collapse'}
       %span.sr-only Toggle navigation
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
-    %a.navbar-brand{:href => "/"}= title
+    %a.navbar-brand{href: '/'}= title
 
   %div.collapse.navbar-collapse.navbar-ex1-collapse
     - if logged_in?
-      = haml :search
+      %ul.nav.navbar-nav
+        %li
+          %a{href: '/search'} Search
 
     %ul.nav.navbar-nav.navbar-right
       - if logged_in?
         %li.dropdown
           %a.dropdown-toggle{:href => "#", :'data-toggle' => "dropdown"}
-            %span= current_user.name
+            / %span= current_user.name
             %b.caret
           %ul.dropdown-menu
             %li

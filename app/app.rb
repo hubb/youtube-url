@@ -1,17 +1,21 @@
 require 'omniauth-google-apps'
 require 'openid/store/filesystem'
+require 'openid'
+require 'omniauth-openid'
+require 'gapps_openid'
 
-require './models/search'
-require './models/user'
-require './helpers/base'
+require 'models/search'
+require 'models/user'
+require 'helpers/base'
 
 module YoutubeDL
   class Application < Sinatra::Base
 
-    helpers Helpers::Pages,
+    helpers Helpers::Page,
             Helpers::Authentication
 
     # Enable Sessions
+    enable :sessions
     use Rack::Session::Cookie, :secret => ENV['APP_SESSION_SECRET'] || 'test'
 
     # Authentication
@@ -22,13 +26,20 @@ module YoutubeDL
 
     post '/auth/admin/callback' do
       auth_details = request.env['omniauth.auth']
-      log_in(auth_details)
+      halt 400, "Bad Authentication" unless auth_details
+
+      current_user = User.login(auth_details)
+      session[:email] = @user.email
 
       redirect '/'
     end
 
     get '/auth/failure' do
       halt 400, params[:message]
+    end
+
+    get '/login' do
+      redirect '/auth/admin'
     end
 
     get '/logout' do

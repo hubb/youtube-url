@@ -1,0 +1,36 @@
+!!! 5
+%html{lang: 'en'}
+  %head
+    %meta{charset: 'utf-8'}
+    %title= title
+    %meta{name: 'description', content: 'Youtube URL exporter'}
+    %meta{name: 'author', content: 'Thibault Gautriaud'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
+
+    /[if lt IE 9]
+      %script{src: 'http://html5shim.googlecode.com/svn/trunk/html5.js'}
+
+    / Le styles
+    %link{href: 'css/bootstrap.css', type: 'text/css', rel: 'stylesheet'}
+    %link{href: 'css/styles.css', type: 'text/css', rel: 'stylesheet'}
+
+  %body
+
+    = haml :navbar
+
+    - if logged_in?
+      %div.container= yield
+    - else
+      %div.jumbotron
+        %div.container
+          %h2 Youtube URL extract for ad campaign
+          %p You need to login to use this app
+          %p
+            %a.login.btn.btn-primary.btn-lg{href: '/login'}
+              Login with Google
+              %span.glyphicon.glyphicon-user
+
+    / Le js
+    %script{type: 'text/javascript', src: '../js/jquery-2.0.3.js'}
+    %script{type: 'text/javascript', src: '../js/bootstrap/bootstrap.js'}
+

@@ -2,21 +2,24 @@ module YoutubeDL
 	module Helpers::Authentication
 
 		def logged_in?
-			!! session[:email]
+			true
+			# !! session[:email]
 		end
 
 		def log_in(auth = nil)
 			halt 400, "Bad Authentication" unless auth
 
-			current_user    = YoutubeDL::User.login(auth)
-			session[:email] = @current_user.email
+			@current_user = User.login(auth).tap { |user|
+				session[:email] = user.email
+			}
 		end
 
 		def log_out
-			if current_user
-				YoutubeDL::User.logout(current_user)
+			if @current_user
+				User.logout(current_user)
 				session[:email] = nil
 			end
+			@current_user = nil
 		end
 
 		def current_user

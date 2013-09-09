@@ -6,9 +6,9 @@ module YoutubeDL
 		attr_reader :query, :lang
 
 		def initialize(params = {})
-			raise ArgumentError.new("Missing parameters") if params.nil? || params.empty?
+			raise ArgumentError.new("Missing parameters") unless params
 
-			@query = params.fetch("query")
+			@query = params.fetch("query") { raise ArgumentError.new("Missing query") }
 			@lang  = params.fetch("lang")  { 'en' }
 		end
 

@@ -1,4 +1,4 @@
 tmp/
 .DS_Store
-ssl
+ssl/
 .env
