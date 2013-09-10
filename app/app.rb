@@ -6,6 +6,7 @@ require 'gapps_openid'
 
 require 'models/search'
 require 'models/user'
+require 'models/video'
 require 'helpers/base'
 
 require 'pry-remote'
@@ -76,6 +77,19 @@ module YoutubeDL
 
       @videos = @search.results
 
+      haml :videos
+    end
+
+    # Upload CSV
+    get '/upload' do
+      haml :upload
+    end
+
+    post '/upload' do
+      file = params["file"][:tempfile]
+      halt 400, "Uploaded file might be shitty.." unless file
+
+      @videos = Video.from_csv(file).values
       haml :videos
     end
 

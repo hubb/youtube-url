@@ -12,6 +12,8 @@
       %ul.nav.navbar-nav
         %li
           %a{href: '/search'} Search
+        %li
+          %a{href: '/upload'} Upload
 
     %ul.nav.navbar-nav.navbar-right
       - if logged_in?
@@ -25,6 +27,6 @@
 
       - else
         %li
-          %a.login{:href => "/auth/admin"}
+          %a.login{:href => "/login"}
             Login
             %span.glyphicon.glyphicon-user
