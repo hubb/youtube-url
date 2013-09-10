@@ -10,34 +10,32 @@ module YoutubeDL
 
     end
 
+    module Authorization
+      def authorize!
+        current_user || redirect('/login', 301)
+      end
+    end
+
     module Authentication
+
+      def authenticate!(auth_details)
+        if @current_user = YoutubeDL::User.login(auth_details)
+          session[:email] = @current_user.email
+        else
+          halt 400, "Unable to authenticate you!"
+        end
+      end
 
       def logged_in?
         !! session[:email]
       end
 
-      def log_in(auth = nil)
-
-
-        @current_user = User.login(auth).tap { |user|
-          session[:email] = user.email
-        }
-      end
-
-      def log_out
-        if @current_user
-          User.logout(current_user)
-          session[:email] = nil
-        end
-        @current_user = nil
-      end
-
       def current_user
-        @current_user
-      end
-
-      def current_user=(user)
-        @current_user = user
+        @current_user ||= begin
+          YoutubeDL::User.find(session[:email])
+        rescue
+          halt 404, "I fucked up something, somewhere :("
+        end
       end
 
     end

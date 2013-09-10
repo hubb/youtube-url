@@ -32,7 +32,7 @@ describe YoutubeDL::User do
     context '(an existing user)' do
       before(:each) do
         subject
-        YoutubeDL::User.stub(:login => subject)
+        described_class.stub(:login => subject)
       end
 
       it 'is returned from the store' do
@@ -63,5 +63,24 @@ describe YoutubeDL::User do
       end
     end
 
+  end
+
+  describe '.find' do
+
+    it 'responds to find' do
+      described_class.should respond_to(:find)
+    end
+
+    it 'returns the user if he exists' do
+      described_class.find("steve@example.com").should be_instance_of(described_class)
+    end
+
+    it 'raises an error if user not found' do
+      expect { described_class.find("michel@test.com") }.to raise_error
+    end
+
+    it 'raises an error if no email given' do
+      expect { described_class.find(nil) }.to raise_error
+    end
   end
 end

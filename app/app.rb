@@ -8,11 +8,14 @@ require 'models/search'
 require 'models/user'
 require 'helpers/base'
 
+require 'pry-remote'
+
 module YoutubeDL
   class Application < Sinatra::Base
 
     helpers Helpers::Page,
-            Helpers::Authentication
+            Helpers::Authentication,
+            Helpers::Authorization
 
     # Enable Sessions
     enable :sessions
@@ -26,10 +29,7 @@ module YoutubeDL
 
     post '/auth/admin/callback' do
       auth_details = request.env['omniauth.auth']
-      halt 400, "Bad Authentication" unless auth_details
-
-      current_user = User.login(auth_details)
-      session[:email] = @user.email
+      authenticate!(auth_details)
 
       redirect '/'
     end
@@ -43,7 +43,11 @@ module YoutubeDL
     end
 
     get '/logout' do
-      log_out
+      authorize!
+
+      User.logout(session[:email])
+      session[:email] = nil
+
       redirect '/'
     end
 
@@ -54,12 +58,16 @@ module YoutubeDL
 
     # Search
     get '/search' do
+      authorize!
+
       @videos = []
       haml :videos
     end
 
     # Actually search stuff
     post '/search' do
+      authorize!
+
       begin
         @search = Search.new(params["search"])
       rescue ArgumentError => error

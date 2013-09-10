@@ -22,6 +22,18 @@ module YoutubeDL
       users.delete(email)
     end
 
+    def self.find(email = nil)
+      if email
+        if user = users[email]
+          return user
+        else
+          raise Error.new("User not found")
+        end
+      else
+        raise Error.new("Cant find a user without an email")
+      end
+    end
+
 
     attr_reader :id, :email, :first_name, :last_name
 
